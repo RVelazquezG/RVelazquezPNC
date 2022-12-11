@@ -1,0 +1,142 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Libros</h2>
+    <div class="row">
+
+        @using (Html.BeginForm("Form", "Libro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.IdLibro, new { @class = "hidden" })
+                        @Html.TextBoxFor(model => model.IdLibro, new { @class = "hidden form-control" })
+                        @Html.ValidationMessageFor(model => model.IdLibro)
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Nombre)
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.NumeroPaginas)
+                            @Html.TextBoxFor(model => model.NumeroPaginas, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NumeroPaginas)
+
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.FechaPublicacion)
+                            @Html.TextBoxFor(model => model.FechaPublicacion, new { @class = "form-control", @id = "txtFechaPublicacion" })
+                            @Html.ValidationMessageFor(model => model.FechaPublicacion)
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Edicion)
+                            @Html.TextBoxFor(model => model.Edicion, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Edicion)
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="col-md-4">
+
+                            @Html.LabelFor(model => model.Autor.IdAutor)
+                            @Html.DropDownListFor(model => model.Autor.IdAutor, new SelectList(Model.Autor.Autores, "IdAutor", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Autor.Autores)
+
+                        </div>
+
+
+
+                        <div class="col-md-4">
+
+                            @Html.LabelFor(model => model.Editorial.IdEditorial)
+                            @Html.DropDownListFor(model => model.Editorial.IdEditorial, new SelectList(Model.Editorial.Editoriales, "IdEditorial", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Editorial.Editoriales)
+
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            @Html.LabelFor(model => model.Genero.IdGenero)
+                            @Html.DropDownListFor(model => model.Genero.IdGenero, new SelectList(Model.Genero.Generos, "IdGenero", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Genero.Generos)
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        @Html.ActionLink("Regresar", "GetAll", "Form", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+
+
+        }
+
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#txtFechaPublicacion").datepicker({
+                minDate: "-200Y", maxDate: "+1M +10D",
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true,
+                changeYear: true,
+            });
+        });
+
+    </script>
+}
+
